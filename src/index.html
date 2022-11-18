@@ -38,8 +38,22 @@
      <section id="movieSection">
       <p id="showCount"></p>
       <div class="movie-container" id="movieBox"></div>
+      <button class="open-button"> boton modulos</button>
+
+      <dialog class="modal" id="modal">
+        <div class="text" id="modalTextContainer">
+          <h3 class="movie-name">${movie.title}</h3>
+          <h3 class="director">${movie.director}</h3>
+          <h3 class="producer">${movie.producer}</h3>
+          <p class="resume">${movie.description}</p>
+        </div>
+        <button id= "closeModalButton" class="button close-button"> <img class="xmark" src= ".src/square-xmark-solid 1.png" alt="close icon"></img> </button> 
+      </dialog>
+
+
+  
+
      </section>
-      
       </div>
       <div id="root"></div>
     </main>

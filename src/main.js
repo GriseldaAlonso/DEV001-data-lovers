@@ -25,10 +25,26 @@ function createMovies (movie){
 				<h3 class="movie-name">${movie.title}</h3>
 		  		<p class="year">${movie.release_date}</p>
 			</div>
+			<button id="buttonForModal"> open modal </button>
 		</div>
 	`;
 	movieContainer.innerHTML += movieTemplate;
 } 
+
+ //función para módulos
+ const modal = document.querySelector("#modal");
+ const openModal = document.querySelector(".open-button");
+ const closeModal = document.querySelector(".close-button");
+ 
+ openModal.addEventListener("click", () => {
+   modal.showModal();
+ });
+ 
+ closeModal.addEventListener("click", () => {
+   modal.close();
+ });
+ 
+
 
 //filtro pagina principal
 function showAllMovies(ghibliData){
