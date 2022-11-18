@@ -13,6 +13,7 @@ export const directorFilter = (ghibliData, select)=>{
 	return director
 }
 
+
 //funcion ordenar por año ascendente
 export const yearSort = (ghibliData, selectorValue) =>{
 	if (selectorValue === "asc"){

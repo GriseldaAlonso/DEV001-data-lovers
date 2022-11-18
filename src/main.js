@@ -5,8 +5,9 @@ const ghibliData = data.films;
 let dataView = data.films;
 const movieContainer = document.getElementById("movieBox");
 const inputSearch = document.querySelector(".cards-filter");
-const selectDirector = document.getElementById("director");
-const sortSelector = document.getElementById("sortGhibli");
+let selectDirector = document.getElementById("director");
+let sortSelector = document.getElementById("sortGhibli");
+const showCount = document.getElementById("showCount");
 
 //función que limpia el div movieContainer
 const cleanContainer = () => {
@@ -24,36 +25,56 @@ function createMovies (movie){
 				<h3 class="movie-name">${movie.title}</h3>
 		  		<p class="year">${movie.release_date}</p>
 			</div>
+			<button id="buttonForModal"> open modal </button>
 		</div>
 	`;
 	movieContainer.innerHTML += movieTemplate;
 } 
 
+ //función para módulos
+ const modal = document.querySelector("#modal");
+ const openModal = document.querySelector(".open-button");
+ const closeModal = document.querySelector(".close-button");
+ 
+ openModal.addEventListener("click", () => {
+   modal.showModal();
+ });
+ 
+ closeModal.addEventListener("click", () => {
+   modal.close();
+ });
+ 
+
+
 //filtro pagina principal
 function showAllMovies(ghibliData){
 	ghibliData.forEach(createMovies)
 }
-
 showAllMovies(ghibliData);
 
 //funcion input de busqueda, llamada desde data.js
 inputSearch.addEventListener("keyup", () => {
+	selectDirector.value = "all";
+	sortSelector.value= "";
 	const allMovies = searchData(ghibliData, 'title', inputSearch.value);
 	cleanContainer();
+	const countMovie = allMovies.length;
+	showCount.innerText = "Showing " + countMovie + " results";
 	allMovies.forEach(createMovies);
 })
 
 // funcion filtro con input de selector
-
 selectDirector.addEventListener('change', (event) =>{
 	const selectDirectorValue = event.target.value;
 	if (selectDirectorValue === "all"){
 		cleanContainer();
 		showAllMovies(ghibliData)
 	} else {
-		dataView = directorFilter(ghibliData, event.target.value);
+		dataView = directorFilter(ghibliData, selectDirectorValue);
 	cleanContainer();
 	dataView.forEach(movie => {
+		const countMovie = dataView.length;
+		showCount.innerText = "Showing " + countMovie + " results";
 		createMovies(movie)
 	});
 	}
